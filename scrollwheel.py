@@ -53,4 +53,5 @@ ttk.Label(frm,  text="button to change hotkey\n(esc to cancel)").grid(column=0, 
 hotkeybut = ttk.Button(frm, text="f6", command=set_hotkey)
 hotkeybut.grid(column=0, row=2)
 ttk.Button(frm, text="Quit", command=root.destroy).grid(column=0, row=3)
+root.wm_attributes("-topmost", True)
 root.mainloop()
