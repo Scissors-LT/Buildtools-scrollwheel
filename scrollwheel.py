@@ -1,15 +1,11 @@
-import mouse
+import mouse, keyboard, time, threading, random
 import tkinter as tk
 from tkinter import *
 from tkinter import ttk
-import time
-import keyboard
-import threading
-import random
 
 is_on = False
 myhotkey = "f6"
-
+last_press = 0
 
 def get_boxes():
     hotbarslots = []
@@ -20,8 +16,7 @@ def get_boxes():
 
 
 def scroll(): # actually do the scrolling
-    # global is_on
-    global uhotbar
+    global is_on, uhotbar
     while is_on:
         if uhotbar.get():
             slots = get_boxes()
@@ -36,20 +31,24 @@ def scroll(): # actually do the scrolling
                 keyboard.press(slots[rand])
                 keyboard.release(slots[rand])
                 time.sleep(0.02)
-            break
 
         else:
             mouse.wheel(-1)
             time.sleep(0.001)
-            break
 
 
 def toggle():
-    global is_on
+    global is_on, last_press
+    now = time.time()
+
+    if now - last_press < 0.3:
+        return
+
     if not is_on:
         is_on = True
         indicator.config(text="on", foreground="green", font=("comic sans", 25))
         threading.Thread(target=scroll, daemon=True).start() # start scrolling and set the big label to on
+        last_press = now
     else:
         is_on = False
         indicator.config(text="off", foreground="red", font=("comic sans", 25)) # stop and set label to off
