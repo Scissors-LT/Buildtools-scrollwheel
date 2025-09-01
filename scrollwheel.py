@@ -36,12 +36,10 @@ def scroll(): # actually do the scrolling
                 keyboard.press(slots[rand])
                 keyboard.release(slots[rand])
                 time.sleep(0.02)
-            break
 
         else:
             mouse.wheel(-1)
             time.sleep(0.001)
-            break
 
 
 def toggle():
