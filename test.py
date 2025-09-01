@@ -1,15 +1,19 @@
-import mouse
 import tkinter as tk
 from tkinter import *
 from tkinter import ttk
-import time
 import keyboard
-import threading
+import time
 import random
+import mouse
 
-is_on = False
-myhotkey = "f6"
+is_on = True
 
+def set_hotkey():
+    print("hotkey button pressed")
+
+
+def test():
+    print("button pressed")
 
 def get_boxes():
     hotbarslots = []
@@ -18,10 +22,10 @@ def get_boxes():
             hotbarslots.append(i+1)
     return(hotbarslots)
 
-
 def scroll(): # actually do the scrolling
     # global is_on
     global uhotbar
+    time.sleep(3)
     while is_on:
         if uhotbar.get():
             slots = get_boxes()
@@ -44,31 +48,7 @@ def scroll(): # actually do the scrolling
             break
 
 
-def toggle():
-    global is_on
-    if not is_on:
-        is_on = True
-        indicator.config(text="on", foreground="green", font=("comic sans", 25))
-        threading.Thread(target=scroll, daemon=True).start() # start scrolling and set the big label to on
-    else:
-        is_on = False
-        indicator.config(text="off", foreground="red", font=("comic sans", 25)) # stop and set label to off
 
-def set_hotkey():
-    global myhotkey
-    oldkey = myhotkey
-    rkey = keyboard.read_key() # wait for keypress and then continue
-
-    if rkey == 'esc':
-        return
-
-    else:
-        myhotkey = rkey
-        keyboard.remove_hotkey(str(oldkey))
-        keyboard.add_hotkey(rkey, toggle)
-        hotkeybut.config(text=rkey)
-
-keyboard.add_hotkey(myhotkey, toggle)
 
 root = Tk()
 
@@ -99,7 +79,10 @@ for i in range(9):
     cb.grid(column=i, row=0, padx=5)
 
 
+
 ttk.Button(frm, text="Quit", command=root.destroy).grid(column=0, row=5)
+ttk.Button(frm, text="test checkboxes", command=scroll).grid(column=0, row=6)
+
 
 
 root.wm_attributes("-topmost", True)

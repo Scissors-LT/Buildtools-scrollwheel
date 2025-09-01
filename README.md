@@ -1,10 +1,5 @@
-﻿# Buildtools-scrollwheel
+﻿# Scrollie
 
+Tool for texturing minecraft walls by simulating an unlocked scrollwheel.
 
-
-uhhh you just press f6 and then it scrolls down really fast until you press f6 again...
-
-now with hotkey changing button
-
-
-
+I also added a thing that lets you select certain parts of your hotbar to scroll through :)
